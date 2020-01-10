@@ -1,5 +1,5 @@
-function hero () {
-    hero2 = sprites.create(img`
+function hero2 () {
+    hero = sprites.create(img`
 . . . . . . . . . . . . . . . . 
 . . . . 5 . 5 . 5 . 5 . . . . . 
 . . . . . 5 5 5 5 5 . . . . . . 
@@ -17,8 +17,8 @@ function hero () {
 . . . 1 1 8 8 8 8 8 1 1 . . . . 
 . . . . . 4 4 4 4 4 . . . . . . 
 `, SpriteKind.Player)
-    hero2.setPosition(78, 97)
-    controller.moveSprite(hero2, 100, 0)
+    hero.setPosition(78, 97)
+    controller.moveSprite(hero, 100, 0)
 }
 function score () {
     info.changeScoreBy(1)
@@ -28,10 +28,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     overlap()
 })
 function overlap () {
-    game.over(false)
+    effects.blizzard.startScreenEffect()
+    scene.cameraShake(3, 100)
 }
-function projectile () {
-    projectile2 = sprites.createProjectileFromSide(img`
+function projectile2 () {
+    projectile = sprites.createProjectileFromSide(img`
 . . . . f . f . f . f . . . . . 
 . . . . . f f f f f . . . . . . 
 . . . . . f f f f f . . . . . . 
@@ -50,9 +51,9 @@ function projectile () {
 . . . . . c c c c c . . . . . . 
 `, 0, 0)
 }
-let projectile2: Sprite = null
-let hero2: Sprite = null
-hero()
+let projectile: Sprite = null
+let hero: Sprite = null
+hero2()
 game.onUpdateInterval(200, function () {
-    projectile()
+    projectile2()
 })
